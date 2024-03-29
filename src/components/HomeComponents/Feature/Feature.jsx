@@ -7,7 +7,7 @@ import { PiWechatLogoThin } from "react-icons/pi";
 
 const Feature = () => {
     return (
-        <div className='grid grid-cols-3 py-10 gap-3'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 py-10 gap-3'>
             <div className='flex gap-2 items-center bg-white py-4 pl-4'>
                 <div>
                     <span className='text-6xl text-[#FCB543]'><CiDeliveryTruck></CiDeliveryTruck></span>

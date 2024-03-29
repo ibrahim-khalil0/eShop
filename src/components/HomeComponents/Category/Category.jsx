@@ -8,7 +8,7 @@ const Category = () => {
                 <span className='text-lg'>Category Of The Month</span>
             </div>
 
-            <div className="grid grid-cols-8 gap-[2px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-[2px]">
                 {
                     cate.map(cate => <div className='bg-white text-center px-3 py-5 text-sm'>
                     <div>

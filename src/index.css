@@ -24,3 +24,19 @@
 .relative:hover .overlay{
     background-color: #ffffff7a;
 }
+
+.slider {
+    -webkit-appearance: none;
+    background-color: black;
+    height: 2px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #FCB543;
+    cursor: pointer;
+    border-radius: 50%;
+  }
