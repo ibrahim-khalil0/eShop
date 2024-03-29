@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*{
+    font-family: "Work Sans", sans-serif;
+    box-sizing: border-box;
+}
+
+
+.active {
+    color: #FCB543;
+}
+
+.dropDown:hover + .dropMenu{
+    display: block;
+    position: absolute;
+    top: -40px
+}
+
+.relative:hover .overlay{
+    background-color: #ffffff7a;
+}
