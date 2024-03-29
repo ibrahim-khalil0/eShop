@@ -3,7 +3,7 @@ import React from 'react';
 const Banner = () => {
     return (
         <div style={{backgroundImage: 'url(https://i.ibb.co/qY1v2nd/banner.jpg)'}} className='bg-center bg-cover'>
-            <div className='px-[5%] sm:px-[10%] bg-[#00000099] text-white flex justify-between gap-10'>
+            <div className='px-[5%] sm:px-[7%] lg:px-[10%] bg-[#00000099] text-white flex justify-between gap-10'>
                 <div className='md:w-3/5 space-y-5 py-20'>
                     <span className='bg-white text-black px-5 py-2 rounded-md font-bold text-lg'>e-Shop</span>
                     <h1 className='text-3xl lg:text-4xl font-semibold'>Discover Your Perfect Find Shop the Latest Trends & Deals!</h1>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ProductCard = () => {
 
@@ -14,7 +15,7 @@ const ProductCard = () => {
 
 
     return (
-        <div className="bg-white cursor-pointer hover:shadow-lg shadow-gray-300 hover:-top-2 relative">
+        <Link to={`/product/id`} className="bg-white cursor-pointer hover:shadow-lg shadow-gray-300 hover:-top-2 relative">
             <div>
                 <img src="https://i.ibb.co/HH2WWhY/ladies-bag.webp" alt="" className='h-44 w-full' />
             </div>
@@ -36,7 +37,7 @@ const ProductCard = () => {
                     <span className="ml-2">(37)</span>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

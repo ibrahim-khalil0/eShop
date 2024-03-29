@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
     return (
         <div className="bg-white">
-            <div className='flex justify-between items-center py-5 px-[5%] sm:px-[10%] flex-wrap lg:flex-nowrap'>
+            <div className='flex justify-between items-center py-5 px-[5%] sm:px-[7%] lg:px-[10%] flex-wrap lg:flex-nowrap'>
                 {/* this is site logo  */}
                 <div className='w-1/2 lg:w-[270px] order-1'>
                     <h1 className='text-3xl font-bold'><span className='text-[#FCB543]'>e</span>-Shop</h1>
@@ -40,7 +40,7 @@ const Header = () => {
             </div>
 
             {/* menu section start here  */}
-            <div className="flex text-md justify-between items-center border-y-gray-200 lg:border py-3 px-[5%] sm:px-[10%]">
+            <div className="flex text-md justify-between items-center border-y-gray-200 lg:border py-3 px-[5%] sm:px-[7%] lg:px-[10%]">
                 {/* category area  */}
                 
                 <div className="hidden lg:flex items-center w-[230px]">

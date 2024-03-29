@@ -1,13 +1,16 @@
-import React from 'react';
+import { FaStar } from "react-icons/fa";
+import ProductCard from "../../sharedComponents/ProductCard/ProductCard";
 
 const Shop = () => {
+
+    const products = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6]
     const brands = ['samsung', 'oppo', 'vivo', 'one plus', 'dell', 'hp', 'walton', 'minister', 'vision']
     return (
-        <div className='px-[5%] sm:px-[10%] flex gap-8 bg-white py-16'>
+        <div className='px-[5%] sm:px-[7%] lg:px-[10%] flex flex-col-reverse lg:flex-row gap-8 bg-white pt-8 pb-16 lg:py-16'>
             {/* sidebar start here  */}
-            <div className='w-64 bg-[#F5F5F5] py-6 px-4'>
+            <div className='lg:w-64 bg-[#F5F5F5] py-6 px-4'>
                 {/* shop by brand  */}
-                <h1 className='mb-4'>By Brands</h1>
+                <h1 className='mb-4 uppercase'>By Brands</h1>
                 <div className='space-y-3 uppercase text-xs h-48 overflow-y-scroll'>
                     {
                         brands.map(brand => 
@@ -18,19 +21,83 @@ const Shop = () => {
                             )
                     }
                 </div>
-                <hr className='border-t-2 border-t-gray my-8' />
+                <hr className='border-t-2 border-t-gray my-6' />
 
                 {/* filter by price  */}
                 <div>
-                    <h1 className='mb-4'>By Price</h1>
+                    <h1 className='mb-4 uppercase'>By Price</h1>
                     <input type="range" min="1" max="10000" class="slider w-full" id="myRange"/>
                     <h4 className='text-sm text-gray-500 mt-2'>Price : BDT 1000</h4>
                 </div>
+
+                <hr className='border-t-2 border-t-gray my-6' />
+
+                {/* filter by review  */}
+                <div className="space-y-3">
+                    <h1 className='mb-4 uppercase'>By review</h1>
+                    <div className='flex gap-1 items-center cursor-pointer text-xs text-gray-500'>
+                        <div className='h-4 w-4 border border-gray-400 rounded-sm bg-white mr-1'></div>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <span className="ml-1">(12)</span>
+                    </div>
+
+                    <div className='flex gap-1 items-center cursor-pointer text-xs text-gray-500'>
+                        <div className='h-4 w-4 border border-gray-400 rounded-sm bg-white mr-1'></div>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar></FaStar>
+                        <span className="ml-1">(12)</span>
+                    </div>
+
+                    <div className='flex gap-1 items-center cursor-pointer text-xs text-gray-500'>
+                        <div className='h-4 w-4 border border-gray-400 rounded-sm bg-white mr-1'></div>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar></FaStar>
+                        <FaStar></FaStar>
+                        <span className="ml-1">(12)</span>
+                    </div>
+
+                    <div className='flex gap-1 items-center cursor-pointer text-xs text-gray-500'>
+                        <div className='h-4 w-4 border border-gray-400 rounded-sm bg-white mr-1'></div>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar></FaStar>
+                        <FaStar></FaStar>
+                        <FaStar></FaStar>
+                        <span className="ml-1">(12)</span>
+                    </div>
+
+                    <div className='flex gap-1 items-center cursor-pointer text-xs text-gray-500'>
+                        <div className='h-4 w-4 border border-gray-400 rounded-sm bg-white mr-1'></div>
+                        <FaStar className="text-[#FCB543]"></FaStar>
+                        <FaStar></FaStar>
+                        <FaStar></FaStar>
+                        <FaStar></FaStar>
+                        <FaStar></FaStar>
+                        <span className="ml-1">(12)</span>
+                    </div>
+                </div>
+                <hr className='border-t-2 border-t-gray my-6' />
+
             </div>
 
             {/* product section  */}
-            <div className='bg-[#F5F5F5] flex-1'>
-                <h1>this is product area</h1>
+            <div className='bg-[#F5F5F5] flex-1 py-6 px-4'>
+                <h1 className="uppercase border-b border-b-gray-300">Shop</h1>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 pt-8">
+                    {
+                        products.map(product => <ProductCard></ProductCard>)
+                    }
+                </div>
             </div>
         </div>
     );
