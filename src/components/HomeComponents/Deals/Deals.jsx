@@ -8,7 +8,7 @@ const Deals = () => {
 
     useEffect( () => {
 
-        axios('http://localhost:5000/products')
+        axios('https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/products')
         .then(res => {
             setProducts(res.data)
             console.log(res.data)

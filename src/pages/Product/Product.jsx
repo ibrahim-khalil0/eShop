@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaStar, FaHeart } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import ProductCard from '../../sharedComponents/ProductCard/ProductCard';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const Product = () => {
+
+    
 
     // product details 
     const [product, setProduct] = useState({})
     const {name, brand, category,  review, storeName, regularPrice, discountPrice, features, description, ratings, status, image } = product
     const {id} = useParams()
 
+    const {user} = useContext(AuthContext)
+
     const discount = regularPrice - discountPrice
     const discountPercent = (discount / regularPrice) * 100
 
+
     useEffect( () => {
 
-        axios(`http://localhost:5000/products?id=${id}`)
+        axios(`https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/products?id=${id}`)
         .then(res => {
             setProduct(res.data)
             setManiImg(res.data.image[0])
@@ -30,7 +39,7 @@ const Product = () => {
     const [products, setProducts] = useState([])
     useEffect( () => {
 
-        axios(`http://localhost:5000/product/Fashion`)
+        axios(`https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/product/Fashion`)
         .then(res => {
             setProducts(res.data)
             console.log(res.data)
@@ -48,6 +57,36 @@ const Product = () => {
 
 
       const [mainImg, setManiImg] = useState('')
+
+
+
+    //   add to cart product 
+
+    const [quantity, setQuantity] = useState(1)
+    const increaseQuantity = () => {
+        setQuantity(quantity + 1)
+    }
+
+    const decreaseQuantity = () => {
+        if(quantity > 1){
+            setQuantity(quantity- 1)
+        }
+    }
+
+    const handleCart = () => {
+
+        if(user){
+            product.user = user.email
+            product.quantity = quantity
+            delete product._id
+            axios.post('https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/carts', product)
+            .then(res => {
+                toast('Successfully added on cart')
+            })
+        } else {
+            toast('Please Login First')
+        }
+    }
 
     return (
         <div className='pt-8 pb-10'>
@@ -113,13 +152,13 @@ const Product = () => {
                         <div>
                             <h6 className='text-xs text-gray-500'>Quantity</h6>
                             <div className='border border-gray-400 text-center flex gap-4 px-4 py-1'>
-                                <span>-</span>
-                                <span>1</span>
-                                <span>+</span>
+                                <span onClick={decreaseQuantity} className='cursor-pointer'>-</span>
+                                <span>{quantity}</span>
+                                <span onClick={increaseQuantity} className='cursor-pointer'>+</span>
                             </div>
                         </div>
                         <div>
-                            <button className='text-lg bg-[#FCB543] text-white px-10 py-[10px] rounded-sm'>Add to cart</button>
+                            <button onClick={handleCart} className='text-lg bg-[#FCB543] text-white px-10 py-[10px] rounded-sm'>Add to cart</button>
                         </div>
                         <div className='text-2xl'>
                             <CiHeart></CiHeart>
@@ -148,6 +187,7 @@ const Product = () => {
                     }
                 </div>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

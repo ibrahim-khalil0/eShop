@@ -1,7 +1,34 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Cart = () => {
-    const table = [1, 2, 3]
+
+    const {user} = useContext(AuthContext)
+    const [products, setProducts] = useState([])
+    const [refetch, setRefetch] = useState(1)
+
+    const location = useLocation()
+
+    useEffect( () => {
+        axios(`https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/carts/${user?.email}`)
+        .then(res => {
+            setProducts(res.data)
+            console.log(res.data)
+        })
+    }, [user?.email, refetch])
+
+    // remove product from cart 
+
+    const handleRemove = (id) => {
+        axios.delete(`https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/remove/${id}`)
+        .then(res => {
+           setRefetch(refetch + 1)
+        })
+    }
+
+
     return (
         <div className='px-[5%] sm:px-[7%] lg:px-[10%]'>
             <h1 className='py-20 text-center text-5xl font-bold'>Cart</h1>
@@ -16,22 +43,22 @@ const Cart = () => {
                     <div className="text-right">Remove</div>
                 </div>
                 {
-                    table.map(row => 
+                    products.map(product => 
                         <div className="md:grid grid-cols-1 md:grid-cols-9 gap-2 px-5 py-5 text-sm border-b border-b-gray-300">
                             <div>
-                                <img src="https://i.ibb.co/HH2WWhY/ladies-bag.webp" alt="" className="w-16" />
+                                <img src={product.image[0]} alt="" className="w-16" />
                             </div>
-                            <div className="col-span-3 py-3 md:py-0">iQOS 2.4 Plus Kit, Holder & Chargers - White</div>
-                            <div className="md:text-center"><span className="md:hidden">Price: </span>৳1000</div>
+                            <div className="col-span-3 py-3 md:py-0">{product.name}</div>
+                            <div className="md:text-center"><span className="md:hidden">Price: </span>৳{product.discountPrice}</div>
                             <div className="text-center col-span-2 py-3 md:py-0">
                                 <div className='border border-gray-400 text-center flex gap-4 px-4 py-1 w-[90%] md:w-24 md:mx-auto justify-center'>
                                     <span>-</span>
-                                    <span>1</span>
+                                    <span>{product.quantity}</span>
                                     <span>+</span>
                                 </div>
                             </div>
-                            <div className="md:text-center"><span className="md:hidden">Total: </span>৳1000</div>
-                            <div className="text-right -mt-14 mb-8 md:mt-0 md:mb-0">X</div>
+                            <div className="md:text-center"><span className="md:hidden">Total: </span>৳{product.quantity * product.discountPrice}</div>
+                            <div className="text-right -mt-14 mb-8 md:mt-0 md:mb-0"><span onClick={() => handleRemove(product._id)}>X</span></div>
                         </div>
                         )
                 }

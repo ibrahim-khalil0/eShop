@@ -20,7 +20,7 @@ const Register = () => {
 
         const user = {name, email, phone, password}
 
-        axios.post('http://localhost:5000/newUser', user)
+        axios.post('https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/newUser', user)
         .then(res => {
             if(res.data == 'Already have an account'){
                 setError(res.data)
@@ -57,7 +57,7 @@ const Register = () => {
 
                 <div>
                     <label htmlFor="phone">Your Phone Number</label>
-                    <input className='border mt-1 border-gray-300 px-4 py-3 rounded-sm outline-0 w-full' type="text" id="phone" name="phone" pattern="\+880\d{10}" title="Please enter a valid Bangladeshi phone number" required/>
+                    <input className='border mt-1 border-gray-300 px-4 py-3 rounded-sm outline-0 w-full' type="text" id="phone" name="phone" pattern="\+880\d{10}" title="Please enter a valid Bangladeshi phone number start with +880" required/>
                 </div>
                 
                 <div>

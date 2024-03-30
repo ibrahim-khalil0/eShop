@@ -16,7 +16,7 @@ const Login = () => {
         const password = form.password.value 
         console.log(phone, password)
 
-        axios(`http://localhost:5000/newUser/${phone}`)
+        axios(`https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/newUser/${phone}`)
         .then(res => {
             if(res.data.email){
                 signIn(res.data.email, password)

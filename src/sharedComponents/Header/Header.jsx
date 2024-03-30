@@ -2,17 +2,28 @@ import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 import { CiPhone, CiUser } from "react-icons/ci";
 import { RxCaretDown } from "react-icons/rx";
 import { HiBars3 } from "react-icons/hi2";
-import { Link, NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
 
 const Header = () => {
 
     const {user, logOut} = useContext(AuthContext)
+    const location = useLocation()
+    console.log(location)
 
     const handleLogOut = () => {
         logOut()
     }
+
+    const [cart, setCart] = useState(0)
+    useEffect( () => {
+        axios(`https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/carts/${user?.email}`)
+        .then(res => {
+            setCart(res.data.length)
+        })
+    }, [user?.email, location.pathname])
 
     return (
         <div className="bg-white">
@@ -33,11 +44,11 @@ const Header = () => {
                     
                     <Link to={'/cart'} className="relative">
                         <span className="text-4xl"><IoCartOutline></IoCartOutline></span>
-                        <span className="absolute right-0 -bottom-1 bg-[#FCB543] grid place-items-center text-[12px] w-5 h-5 rounded-full text-white">10</span>
+                        <span className="absolute right-0 -bottom-1 bg-[#FCB543] grid place-items-center text-[12px] w-5 h-5 rounded-full text-white">{cart}</span>
                     </Link>
                     <div className="relative">
                         <span className="text-4xl"><IoHeartOutline></IoHeartOutline></span>
-                        <span className="absolute right-0 -bottom-1 bg-[#FCB543] grid place-items-center text-[12px] w-5 h-5 rounded-full text-white">10</span>
+                        <span className="absolute right-0 -bottom-1 bg-[#FCB543] grid place-items-center text-[12px] w-5 h-5 rounded-full text-white">0</span>
                     </div>
                 
                     {
