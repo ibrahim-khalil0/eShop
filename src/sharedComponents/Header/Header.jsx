@@ -2,9 +2,18 @@ import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 import { CiPhone, CiUser } from "react-icons/ci";
 import { RxCaretDown } from "react-icons/rx";
 import { HiBars3 } from "react-icons/hi2";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Header = () => {
+
+    const {user, logOut} = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+    }
+
     return (
         <div className="bg-white">
             <div className='flex justify-between items-center py-5 px-[5%] sm:px-[7%] lg:px-[10%] flex-wrap lg:flex-nowrap'>
@@ -15,26 +24,31 @@ const Header = () => {
                 {/* search bar here  */}
                 <div className='lg:flex-1 w-[100%] order-3 lg:order-2 mt-8 lg:mt-0 flex justify-end'>
                     <form className='flex justify-between w-[80%] lg:w-full'>
-                        <input type="search" name="" placeholder='Search product here...' id="search" className='border outline-0 border-y-gray-300 border-r-gray-300 flex-1 py-2 px-4 lg:rounded-l-md' />
+                        <input type="search" name="" placeholder='Search product here...' id="search" className='border outline-0 border-y-gray-300 border-r-gray-300 flex-1 py-2 px-4 lg:rounded-l-md w-full' />
                         <button className='bg-[#FCB543] px-6 rounded-r-md text-white font-bold text-lg'>Search</button>
                     </form>
                 </div>
                 {/* account section here  */}
                 <div className='w-1/2 lg:w-[270px] flex justify-end gap-4 items-center order-2 lg:order-3'>
                     
-                    <div className="relative">
+                    <Link to={'/cart'} className="relative">
                         <span className="text-4xl"><IoCartOutline></IoCartOutline></span>
                         <span className="absolute right-0 -bottom-1 bg-[#FCB543] grid place-items-center text-[12px] w-5 h-5 rounded-full text-white">10</span>
-                    </div>
+                    </Link>
                     <div className="relative">
                         <span className="text-4xl"><IoHeartOutline></IoHeartOutline></span>
                         <span className="absolute right-0 -bottom-1 bg-[#FCB543] grid place-items-center text-[12px] w-5 h-5 rounded-full text-white">10</span>
                     </div>
                 
-                    <div className="flex items-center gap-2">
-                        <span className="text-4xl"><CiUser></CiUser></span>
-                        <span>Log in</span>
-                    </div>
+                    {
+                        user ? 
+                        <button onClick={handleLogOut} className="bg-[#FCB543] text-white py-2 px-2 rounded-md">Logout</button>
+                        :
+                        <Link to={'/login'} className="flex items-center gap-2">
+                            <span className="text-4xl"><CiUser></CiUser></span>
+                            <span>Log in</span>
+                        </Link>
+                    }
                 </div>
 
             </div>

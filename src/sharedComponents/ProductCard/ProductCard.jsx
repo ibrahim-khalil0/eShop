@@ -2,9 +2,14 @@ import { useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const ProductCard = () => {
+const ProductCard = ({product}) => {
 
-    const ratings = 4
+    const {name, regularPrice, discountPrice, ratings, review, image, _id} = product
+    
+    const discount = regularPrice - discountPrice
+    const discountPercent = (discount / regularPrice) * 100
+
+
     useEffect(() => {
         const totalStars = document.querySelectorAll(`.rating > span:nth-child(-n+${ratings})`);
         totalStars.forEach(star => {
@@ -15,17 +20,17 @@ const ProductCard = () => {
 
 
     return (
-        <Link to={`/product/id`} className="bg-white cursor-pointer hover:shadow-lg shadow-gray-300 hover:-top-2 relative">
+        <Link to={`/product/${_id}`} className="bg-white cursor-pointer hover:shadow-lg shadow-gray-300 hover:-top-2 relative">
             <div>
-                <img src="https://i.ibb.co/HH2WWhY/ladies-bag.webp" alt="" className='h-44 w-full' />
+                <img src={image[0]} alt="" className='h-44 w-full' />
             </div>
             <div className='px-3 pt-2 pb-5 space-y-1'>
-                <h5 className='text-sm'>Ladies Bag For Women Stylist Cute Look Bag</h5>
-                <h4 className='text-[#FCB543] '>৳350</h4>
+                <h5 className='text-sm'>{name}</h5>
+                <h4 className='text-[#FCB543] '>৳{regularPrice}</h4>
                 <div>
                 <div className='text-xs'>
-                    <span className='text-gray-500'><del>৳500</del></span>
-                    <span> -30%</span>
+                    <span className='text-gray-500'><del>৳{discountPrice}</del></span>
+                    <span> -{discountPercent}</span>
                 </div>
                 </div>
                 <div className="flex text-gray-400 rating items-center text-xs">
@@ -34,7 +39,7 @@ const ProductCard = () => {
                     <span><FaStar></FaStar></span>
                     <span><FaStar></FaStar></span>
                     <span><FaStar></FaStar></span>
-                    <span className="ml-2">(37)</span>
+                    <span className="ml-2">({review})</span>
                 </div>
             </div>
         </Link>

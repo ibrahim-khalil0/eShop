@@ -1,9 +1,23 @@
 import { FaStar } from "react-icons/fa";
 import ProductCard from "../../sharedComponents/ProductCard/ProductCard";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Shop = () => {
 
-    const products = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6]
+    const [products, setProducts] = useState([])
+
+    useEffect( () => {
+
+        axios('http://localhost:5000/products')
+        .then(res => {
+            setProducts(res.data)
+            console.log(res.data)
+        })
+
+    } ,[])
+
+
     const brands = ['samsung', 'oppo', 'vivo', 'one plus', 'dell', 'hp', 'walton', 'minister', 'vision']
     return (
         <div className='px-[5%] sm:px-[7%] lg:px-[10%] flex flex-col-reverse lg:flex-row gap-8 bg-white pt-8 pb-16 lg:py-16'>
@@ -95,7 +109,7 @@ const Shop = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 pt-8">
                     {
-                        products.map(product => <ProductCard></ProductCard>)
+                        products.map(product => <ProductCard product={product} key={product._id}></ProductCard>)
                     }
                 </div>
             </div>

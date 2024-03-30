@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../../../sharedComponents/ProductCard/ProductCard';
+import axios from 'axios';
 
 const Deals = () => {
+
+    const [products, setProducts] = useState([])
+
+    useEffect( () => {
+
+        axios('http://localhost:5000/products')
+        .then(res => {
+            setProducts(res.data)
+            console.log(res.data)
+        })
+
+    } ,[])
+
     return (
         <div>
             <div className='border-b border-b-gray-300 mb-6 pb-3 flex justify-between items-center'>
@@ -11,12 +25,9 @@ const Deals = () => {
 
             {/* product card  */}
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5'>
-                <ProductCard></ProductCard>
-                <ProductCard></ProductCard>
-                <ProductCard></ProductCard>
-                <ProductCard></ProductCard>
-                <ProductCard></ProductCard>
-                <ProductCard></ProductCard>
+                {
+                    products.slice(0, 10).map(product => <ProductCard product={product} key={product._id}></ProductCard>)
+                }
             </div>
 
         </div>
