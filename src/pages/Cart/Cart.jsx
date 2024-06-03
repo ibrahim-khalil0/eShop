@@ -31,7 +31,7 @@ const Cart = () => {
 
     return (
         <div className='px-[5%] sm:px-[7%] lg:px-[10%]'>
-            <h1 className='py-20 text-center text-5xl font-bold'>Cart</h1>
+            <h1 className='py-20 text-center text-5xl font-bold'> My Cart</h1>
 
             <div>
                 <div className="md:grid hidden md:grid-cols-9 gap-2 bg-white px-5 py-2 font-bold text-sm">
@@ -43,8 +43,8 @@ const Cart = () => {
                     <div className="text-right">Remove</div>
                 </div>
                 {
-                    products.map(product => 
-                        <div className="md:grid grid-cols-1 md:grid-cols-9 gap-2 px-5 py-5 text-sm border-b border-b-gray-300">
+                    products.map((product, idx) => 
+                        <div key={idx} className="md:grid grid-cols-1 md:grid-cols-9 gap-2 px-5 py-5 text-sm border-b border-b-gray-300">
                             <div>
                                 <img src={product.image[0]} alt="" className="w-16" />
                             </div>

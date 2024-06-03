@@ -3,7 +3,7 @@ import { FaStar, FaHeart } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import ProductCard from '../../sharedComponents/ProductCard/ProductCard';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
@@ -11,8 +11,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 const Product = () => {
-
-    
 
     // product details 
     const [product, setProduct] = useState({})
@@ -81,7 +79,7 @@ const Product = () => {
             delete product._id
             axios.post('https://brand-shop-server-h455zo8uc-md-ibrahim-khalils-projects.vercel.app/carts', product)
             .then(res => {
-                toast('Successfully added on cart')
+                setPopup(true)
             })
         } else {
             toast('Please Login First')
